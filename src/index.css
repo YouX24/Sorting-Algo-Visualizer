@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+}
+
+/* .graph-container {
+
+} */
+
+.graph {
+    height: 410px;
+}
+
+.graph-bars {
+    background-color: #2CCCC3;
+}
