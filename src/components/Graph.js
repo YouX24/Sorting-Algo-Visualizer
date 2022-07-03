@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import { nanoid } from 'nanoid';
 
 const Graph = () => {
 
@@ -16,7 +17,7 @@ const Graph = () => {
     // map over the state variable nums and create a new array of jsx elements using the value from the state variable
     const createBars = () => {
         let graphArray = nums.map((num) => 
-        <div className="graph-bars" style={{height: num + 'px' , display: 'inline-block', marginLeft: '1px', marginRight: '1px', marginTop: 'auto'}}></div>
+            <div className="graph-bars" id={nanoid()} style={{height: num + 'px' , display: 'inline-block', marginLeft: '1px', marginRight: '1px', marginTop: 'auto'}}></div>
         );
         return graphArray;
     }
@@ -29,24 +30,36 @@ const Graph = () => {
         setBars(createBars())
     }
 
-    useEffect(() => {
-        // setBars(createBars())
-        console.log('change')
-    }, [nums])
+    // useEffect(() => {
+    //     setBars(createBars())
+    // }, [nums])
+
 
     // FIX
     const bubbleSort = () => {
         const numsCopy = [...nums]
         for (let i = 0; i < numsCopy.length - 1; i++) {
-            for (let j = 0; j < numsCopy.length - i - 1; j++) {
-                if (numsCopy[j] > numsCopy[j + 1]) {
-                    let temp = numsCopy[j];
-                    numsCopy[j] = numsCopy[j + 1];
-                    numsCopy[j + 1] = temp;
-                    setNums(numsCopy)
+            setTimeout(() => {
+                for (let j = 0; j < numsCopy.length - i - 1; j++) {
+                    setTimeout(() => {
+                        const element1 = document.getElementById(bars[i].props.id)
+                        setTimeout(() => {
+                            element1.style.backgroundColor = 'red';
+                        }, 1000)
+                        console.log(element1)
+                        // console.log(bars[i].props.id)
+                        // if (numsCopy[j] > numsCopy[j + 1]) {
+                        //     let temp = numsCopy[j];
+                        //     numsCopy[j] = numsCopy[j + 1];
+                        //     numsCopy[j + 1] = temp;
+                        // }
+                    }, 1000)
+                    
                 }
-            }
+            }, 1000)
+            
         }
+        // setNums(numsCopy)
     }
 
     return (
