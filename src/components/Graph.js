@@ -34,28 +34,39 @@ const Graph = () => {
     //     setBars(createBars())
     // }, [nums])
 
-    const setArray = (e1Id, e2Id, animationCount) => {
-        setTimeout(() => {
-            const bar1 = document.getElementById(e1Id);
-            const bar2 = document.getElementById(e2Id);
-            let bar1Height = bar1.style.height;
-            bar1.style.height = bar2.style.height;
-            bar2.style.height = bar1Height;
-        }, animationCount * 1000)
-    }
+    // const setArray = (e1Id, e2Id, animationCount) => {
+    //     setTimeout(() => {
+    //         const bar1 = document.getElementById(e1Id);
+    //         const bar2 = document.getElementById(e2Id);
+    //         let bar1Height = bar1.style.height;
+    //         bar1.style.height = bar2.style.height;
+    //         bar2.style.height = bar1Height;
+    //     }, animationCount * 1000)
+    // }
 
     const bubbleSort = () => {
         let animationCount = 1;
         const barsCopy = [...bars]
-        for (let i = 0; i < barsCopy.length; i++) {
+        for (let i = 0; i < barsCopy.length - 1; i++) {
             for (let j = 0; j < barsCopy.length - i - 1; j++) {
                 const elem1 = barsCopy[j];
                 const elem2 = barsCopy[j + 1];
 
-                if (elem1.props.style.height > elem2.props.style.height) {
-                    barsCopy[j] = barsCopy[j + 1];
-                    barsCopy[j + 1] = elem1;
-                    setArray(elem1.props.id, elem2.props.id, animationCount)
+                const elem1Height = parseInt(elem1.props.style.height, 10);
+                const elem2Height = parseInt( elem2.props.style.height, 10);
+                
+                if (elem1Height > elem2Height) {
+                    setTimeout(() => {
+                        const bar1 = document.getElementById(elem1.props.id);
+                        const bar2 = document.getElementById(elem2.props.id);
+
+                        bar1.style.backgroundColor = 'red'
+                        bar2.style.backgroundColor = 'red'
+
+                        let bar1Height = bar1.style.height;
+                        bar1.style.height = bar2.style.height;
+                        bar2.style.height = bar1Height;
+                    }, animationCount * 1000)
                 }
                 animationCount++;
             }
