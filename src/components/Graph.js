@@ -6,7 +6,7 @@ const Graph = () => {
 
     const createArray = () => {
         const array = []
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 10; i++) {
             array.push(Math.floor(Math.random() * 400) + 1)
         }
         return array;
@@ -17,7 +17,7 @@ const Graph = () => {
     // map over the state variable nums and create a new array of jsx elements using the value from the state variable
     const createBars = () => {
         let graphArray = nums.map((num) => 
-            <div className="graph-bars" id={nanoid()} style={{height: num + 'px' , display: 'inline-block', marginLeft: '1px', marginRight: '1px', marginTop: 'auto'}}></div>
+            <div className="graph-bars" id={nanoid()} value={num} style={{height: num + 'px' , display: 'inline-block', marginLeft: '1px', marginRight: '1px', marginTop: 'auto'}}></div>
         );
         return graphArray;
     }
@@ -34,37 +34,37 @@ const Graph = () => {
     //     setBars(createBars())
     // }, [nums])
 
+    const setArray = (e1Id, e2Id, animationCount) => {
+        setTimeout(() => {
+            const bar1 = document.getElementById(e1Id);
+            const bar2 = document.getElementById(e2Id);
+            let bar1Height = bar1.style.height;
+            bar1.style.height = bar2.style.height;
+            bar2.style.height = bar1Height;
+        }, animationCount * 1000)
+    }
 
-    // FIX
     const bubbleSort = () => {
-        const numsCopy = [...nums]
-        for (let i = 0; i < numsCopy.length - 1; i++) {
-            setTimeout(() => {
-                for (let j = 0; j < numsCopy.length - i - 1; j++) {
-                    setTimeout(() => {
-                        const element1 = document.getElementById(bars[i].props.id)
-                        setTimeout(() => {
-                            element1.style.backgroundColor = 'red';
-                        }, 1000)
-                        console.log(element1)
-                        // console.log(bars[i].props.id)
-                        // if (numsCopy[j] > numsCopy[j + 1]) {
-                        //     let temp = numsCopy[j];
-                        //     numsCopy[j] = numsCopy[j + 1];
-                        //     numsCopy[j + 1] = temp;
-                        // }
-                    }, 1000)
-                    
+        let animationCount = 1;
+        const barsCopy = [...bars]
+        for (let i = 0; i < barsCopy.length; i++) {
+            for (let j = 0; j < barsCopy.length - i - 1; j++) {
+                const elem1 = barsCopy[j];
+                const elem2 = barsCopy[j + 1];
+
+                if (elem1.props.style.height > elem2.props.style.height) {
+                    barsCopy[j] = barsCopy[j + 1];
+                    barsCopy[j + 1] = elem1;
+                    setArray(elem1.props.id, elem2.props.id, animationCount)
                 }
-            }, 1000)
-            
+                animationCount++;
+            }
         }
-        // setNums(numsCopy)
     }
 
     return (
         <div>
-            <div className='graph' style={{display: 'grid', gridTemplateColumns: 'repeat(' + nums.length + ', 1fr)'}}>
+            <div className='graph' style={{display: 'grid', gridTemplateColumns: 'repeat(' + nums.length + ', 10px)'}}>
                 {bars}
             </div>
             <button onClick={generateNewArray}>Generate New Array</button>
