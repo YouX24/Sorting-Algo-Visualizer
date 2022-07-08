@@ -1,12 +1,12 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import { nanoid } from 'nanoid';
 
 const Graph = () => {
 
     const createArray = () => {
         const array = []
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 20; i++) {
             array.push(Math.floor(Math.random() * 400) + 1)
         }
         return array;
@@ -17,7 +17,7 @@ const Graph = () => {
     // map over the state variable nums and create a new array of jsx elements using the value from the state variable
     const createBars = () => {
         let graphArray = nums.map((num) => 
-            <div className="graph-bars" id={nanoid()} value={num} style={{height: num + 'px' , display: 'inline-block', marginLeft: '1px', marginRight: '1px', marginTop: 'auto'}}></div>
+            <div className="graph-bars" id={nanoid()} style={{height: num + 'px' , display: 'inline-block', marginLeft: '1px', marginRight: '1px', marginTop: 'auto'}}></div>
         );
         return graphArray;
     }
@@ -30,47 +30,51 @@ const Graph = () => {
         setBars(createBars())
     }
 
-    // useEffect(() => {
-    //     setBars(createBars())
-    // }, [nums])
-
-    // const setArray = (e1Id, e2Id, animationCount) => {
-    //     setTimeout(() => {
-    //         const bar1 = document.getElementById(e1Id);
-    //         const bar2 = document.getElementById(e2Id);
-    //         let bar1Height = bar1.style.height;
-    //         bar1.style.height = bar2.style.height;
-    //         bar2.style.height = bar1Height;
-    //     }, animationCount * 1000)
-    // }
-
     const bubbleSort = () => {
         let animationCount = 1;
-        const barsCopy = [...bars]
+        let barsCopy = []
+
+        // get and create object of only the id and height of each bar from state variable bars
+        for (let bar of bars) {
+            let barObj = {
+                id: bar.props.id,
+                height: bar.props.style.height
+            }
+            barsCopy.push(barObj);
+        }
+
         for (let i = 0; i < barsCopy.length - 1; i++) {
             for (let j = 0; j < barsCopy.length - i - 1; j++) {
-                const elem1 = barsCopy[j];
-                const elem2 = barsCopy[j + 1];
 
-                const elem1Height = parseInt(elem1.props.style.height, 10);
-                const elem2Height = parseInt( elem2.props.style.height, 10);
-                
+                const elem1Height = parseInt(barsCopy[j].height, 10);
+                const elem2Height = parseInt( barsCopy[j + 1].height, 10);
+
                 if (elem1Height > elem2Height) {
+
+                    // Change height in barsCopy
+                    const b1 = barsCopy[j + 1].height
+                    const temp = barsCopy[j].height;
+                    barsCopy[j].height = barsCopy[j + 1].height;
+                    barsCopy[j + 1].height = temp;
+
                     setTimeout(() => {
-                        const bar1 = document.getElementById(elem1.props.id);
-                        const bar2 = document.getElementById(elem2.props.id);
+                        // Make changes to the DOM
+                        document.getElementById(barsCopy[j].id).style.height = b1
+                        document.getElementById(barsCopy[j + 1].id).style.height = temp
+                        console.log("time out")
+                    },animationCount * 50)
 
-                        bar1.style.backgroundColor = 'red'
-                        bar2.style.backgroundColor = 'red'
+                    
 
-                        let bar1Height = bar1.style.height;
-                        bar1.style.height = bar2.style.height;
-                        bar2.style.height = bar1Height;
-                    }, animationCount * 1000)
+                    animationCount++;
                 }
-                animationCount++;
+
             }
         }
+        // console.log('\n')
+        // for (let bar of barsCopy) {
+        //     console.log(bar)
+        // }
     }
 
     return (
