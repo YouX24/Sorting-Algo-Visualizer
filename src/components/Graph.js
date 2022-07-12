@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import { nanoid } from 'nanoid';
+import { bubbleSortAnimation } from '../helperFunctions/SortingAnimation';
 
 const Graph = () => {
 
@@ -17,7 +18,7 @@ const Graph = () => {
     // map over the state variable nums and create a new array of jsx elements using the value from the state variable
     const createBars = () => {
         let graphArray = nums.map((num) => 
-            <div className="graph-bars" id={nanoid()} style={{height: num + 'px' , display: 'inline-block', marginLeft: '1px', marginRight: '1px', marginTop: 'auto'}}></div>
+            <div className="graph-bars" style={{height: num + 'px' , display: 'inline-block', marginLeft: '1px', marginRight: '1px', marginTop: 'auto'}}></div>
         );
         return graphArray;
     }
@@ -28,7 +29,7 @@ const Graph = () => {
     }
 
     // NEED TO DO
-    // have className for the bars - all the same
+    // have className for the bars - all the same - DONE
     // have an animation array that stores an array of 2 values that are being compared
     // loop through the animation array
     // grab all the bars with byClassName -> returns a array of bars
@@ -37,24 +38,64 @@ const Graph = () => {
     // settimeout and set the bar height
 
     const sort = () => {
+        let animate = bubbleSortAnimation(nums);
+        let allBars = document.getElementsByClassName('graph-bars')
         let animationCount = 0;
-        let array = [...nums]
-        for (let i = 0; i < 50; i++) {
-            for (let j = 0; j < 50 - 1 - i; j++) {                    
-                if (array[j] > array[j + 1]) {
-                    let temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
-                    setNums(() => {
-                        setTimeout(() => {
-                            console.log(array)
-                        }, 1000)
-                        return array
-                    })
-                    animationCount++
-                }
+
+        for (let ani of animate) {
+            console.log(ani)
+            if (ani[2] === 0) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = 'red'
+                    allBars[ani[1]].style.backgroundColor = 'red'
+                }, 300 * animationCount)
+            } else if (ani[2] === 1) {
+                setTimeout(() => {
+                    let temp = allBars[ani[0]].style.height;
+                    allBars[ani[0]].style.height = allBars[ani[1]].style.height;
+                    allBars[ani[1]].style.height = temp;
+                }, 300 * animationCount)
+            } else {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = '#2CCCC3'
+                    allBars[ani[1]].style.backgroundColor = '#2CCCC3'
+                }, 300 * animationCount)
             }
+            animationCount++;
         }
+
+        // console.log(allBars)
+        // for (let i = 0; i < allBars.length; i++) {
+        //     for (let j = 0; j < allBars.length - 1; j ++) {
+        //         if (parseInt(allBars[j].style.height, 10) > parseInt(allBars[j + 1].style.height, 10)) {
+        //             // setTimeout(() => {
+        //                 let temp = allBars[j].style.height
+        //                 allBars[j].style.height = allBars[j + 1].style.height
+        //                 allBars[j + 1].style.height = temp;
+        //             // }, 1000 * animationCount)
+        //             animationCount++;
+                    
+        //         }
+        //     }
+        // }
+        // let animationCount = 0;
+        // let array = [...nums]
+        // for (let i = 0; i < 50; i++) {
+        //     for (let j = 0; j < 50 - 1 - i; j++) {                    
+        //         if (array[j] > array[j + 1]) {
+        //             let temp = array[j];
+        //             array[j] = array[j + 1];
+        //             array[j + 1] = temp;
+        //             setNums(() => {
+        //                 setTimeout(() => {
+        //                     console.log(array)
+        //                 }, 1000)
+        //                 return array
+        //             })
+        //             animationCount++
+        //         }
+        //     }
+        // }
     }
     
 
