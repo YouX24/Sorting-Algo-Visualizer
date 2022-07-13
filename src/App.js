@@ -4,7 +4,7 @@ import Graph from './components/Graph';
 
 const App = () => {
   return (
-    <div className="graph-container">
+    <div>
       <Header/>
       <Graph/>
     </div>

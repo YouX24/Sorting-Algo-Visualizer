@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
-import { bubbleSortAnimation } from '../helperFunctions/SortingAnimation';
+import { bubbleSortAnimation, selectionSortAnimation } from '../helperFunctions/SortingAnimation';
 
 const Graph = () => {
 
@@ -37,7 +37,7 @@ const Graph = () => {
 
     const bubbleSort = () => {
         let animate = bubbleSortAnimation(nums);
-        let allBars = document.getElementsByClassName('graph-bars')
+        let allBars = document.getElementsByClassName('graph-bars');
         let animationCount = 0;
 
         for (let ani of animate) {
@@ -66,6 +66,38 @@ const Graph = () => {
         }
     }
 
+    const insertionSort = () => {
+        const animate = selectionSortAnimation(nums);
+        let allBars = document.getElementsByClassName('graph-bars');
+        let animationCount = 0;
+
+        for (let ani of animate) {
+            if (ani[2] === 0) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = CURRENT
+                    allBars[ani[1]].style.backgroundColor = CURRENT
+                }, 10 * animationCount)
+            }
+            else if (ani[2] === 1) {
+                setTimeout(() => {
+                    let temp = allBars[ani[0]].style.height;
+                    allBars[ani[0]].style.height = allBars[ani[1]].style.height;
+                    allBars[ani[1]].style.height = temp;
+                }, 10 * animationCount)
+            } else if (ani[2] === 2) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = UNSORTED
+                    allBars[ani[1]].style.backgroundColor = UNSORTED
+                }, 10 * animationCount)
+            } else {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = SORTED
+                }, 10 * animationCount)
+            }
+            animationCount++;
+        }
+    }
+
     // Holds the current algorithm to be used
     const [currentAlgorithm, setCurrentAlgorithm] = useState('Bubble Sort');
 
@@ -88,13 +120,13 @@ const Graph = () => {
     const sort = () => {
         switch(currentAlgorithm) {
             case 'Bubble Sort':
-                bubbleSort()
+                bubbleSort();
                 break;
             case 'Selection Sort':
                 console.log("selection sort not implemeneted yet.")
                 break;
             case 'Insertion Sort':
-                console.log("insertion sort not implemeneted yet.")
+                insertionSort();
                 break;
             case 'Quick Sort':
                 console.log("quick sort not implemeneted yet.")
@@ -123,8 +155,10 @@ const Graph = () => {
                 <button onClick={generateNewArray}>Generate New Array</button>
                 <button onClick={sort}>Sort</button>
             </div>
-            <div className='graph' style={{display: 'grid', gridTemplateColumns: 'repeat(' + nums.length + ', 10px)'}}>
-                {createBars()}
+            <div className='graph-container'>
+                <div className='graph' style={{display: 'grid', gridTemplateColumns: 'repeat(' + nums.length + ', 10px)'}}>
+                    {createBars()}
+                </div>
             </div>
         </section>
     )

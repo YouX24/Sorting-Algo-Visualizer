@@ -47,3 +47,9 @@ header {
     cursor: pointer;
     top: 2.5rem;
 }
+
+.graph-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
