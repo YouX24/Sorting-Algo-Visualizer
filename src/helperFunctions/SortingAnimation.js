@@ -24,7 +24,7 @@ export const bubbleSortAnimation = (array) => {
     return animation;
 }
 
-export const selectionSortAnimation = (array) => {
+export const insertionSortAnimation = (array) => {
     const animation = [];
 
     for (let i = 1; i < array.length; i++) {
@@ -49,5 +49,64 @@ export const selectionSortAnimation = (array) => {
         animation.push([i, i, 3])
     }
     
+    return animation;
+}
+
+export const selectionSortAnimation = (array) => {
+    const animation = [];
+
+    for (let i = 0; i < array.length - 1; i++) {
+        let min = i;
+
+        // color the current min bar
+        // 1 = color min
+        animation.push([min, min, 1]);
+
+        for (let j = i + 1; j < array.length; j++) {
+            // color bar that is being looked at
+            // 2 = color current bar
+            animation.push([j, j, 2]);
+
+            if (array[j] < array[min]) {
+                // revert the color of the current min bar
+                // 3 = revert current min
+                animation.push([min, min, 3])
+
+                // color the new min bar
+                animation.push([j, j, 1]);
+
+                min = j;
+            } else {
+                // revert current pointer color
+                animation.push([j, j, 3]);
+            }
+        }
+
+        // color the two bars that will be swapped.
+        // 4 = colors bars that will be swapped
+        animation.push([i, min, 4]);
+
+        // revert the current min bar color 
+        animation.push([min, min, 3])
+
+        // swap the two bars
+        // 5 = swap values
+        animation.push([i, min, 5]);
+
+        // revert the swapped bars back to regular color
+        animation.push([i, min, 3]);
+
+        // Color the sorted section
+        // 6 = sorted
+        animation.push([i, i, 6]);
+
+        let temp = array[min];
+        array[min] = array[i];
+        array[i] = temp;
+    }
+
+    // Color the last bar
+    animation.push([array.length - 1, array.length - 1, 6])
+
     return animation;
 }

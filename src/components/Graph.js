@@ -1,16 +1,18 @@
 import React from 'react';
 import {useState} from 'react';
-import { bubbleSortAnimation, selectionSortAnimation } from '../helperFunctions/SortingAnimation';
+import { bubbleSortAnimation, insertionSortAnimation, selectionSortAnimation } from '../helperFunctions/SortingAnimation';
 
 const Graph = () => {
 
     const UNSORTED = '#A8D0E6'
     const CURRENT = '#F76C6C';
     const SORTED = '#86C232';
+    const CUR_MIN = 'pink';
+    const SWAP_VALUE = '#BF40BF'
 
     const createArray = () => {
         const array = []
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 25; i++) {
             array.push(Math.floor(Math.random() * 400) + 1)
         }
         return array;
@@ -67,7 +69,7 @@ const Graph = () => {
     }
 
     const insertionSort = () => {
-        const animate = selectionSortAnimation(nums);
+        const animate = insertionSortAnimation(nums);
         let allBars = document.getElementsByClassName('graph-bars');
         let animationCount = 0;
 
@@ -98,6 +100,45 @@ const Graph = () => {
         }
     }
 
+    const selectionSort = () => {
+        const animate = selectionSortAnimation(nums);
+        let allBars = document.getElementsByClassName('graph-bars');
+        let animationCount = 0;
+
+        for (let ani of animate) {
+            if (ani[2] === 1) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = CUR_MIN;
+                }, 30 * animationCount)
+            }
+            else if (ani[2] === 2) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = CURRENT;
+                }, 30 * animationCount)
+            } else if (ani[2] === 3) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = UNSORTED
+                }, 30 * animationCount)
+            } else if (ani[2] === 4) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = SWAP_VALUE;
+                    allBars[ani[1]].style.backgroundColor = SWAP_VALUE;
+                }, 30 * animationCount)
+            } else if (ani[2] === 5) {
+                setTimeout(() => {
+                    let temp = allBars[ani[1]].style.height
+                    allBars[ani[1]].style.height = allBars[ani[0]].style.height
+                    allBars[ani[0]].style.height = temp;
+                }, 30 * animationCount)
+            } else {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = SORTED;
+                }, 30 * animationCount)
+            }
+            animationCount++;
+        }
+    }
+
     // Holds the current algorithm to be used
     const [currentAlgorithm, setCurrentAlgorithm] = useState('Bubble Sort');
 
@@ -123,7 +164,7 @@ const Graph = () => {
                 bubbleSort();
                 break;
             case 'Selection Sort':
-                console.log("selection sort not implemeneted yet.")
+                selectionSort();
                 break;
             case 'Insertion Sort':
                 insertionSort();
