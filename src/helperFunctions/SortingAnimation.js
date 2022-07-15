@@ -110,3 +110,70 @@ export const selectionSortAnimation = (array) => {
 
     return animation;
 }
+
+export const quickSortAnimation = (array) => {
+    const animation = [];
+    quickSort(array, 0, array.length - 1, animation);
+    return animation;
+}
+
+const quickSort = (array, low, high, animation) => {
+    if (low < high) {
+        let pivotIndex = partition(array, low, high, animation);
+        quickSort(array, low, pivotIndex - 1, animation);
+        quickSort(array, pivotIndex + 1, high, animation);
+    }
+}
+
+const partition = (array, low, high, animation) => {
+    let pivot = array[high];
+    //Color the pivot
+    // 0 = color pivot
+    animation.push([high, high, 0])
+
+    let i = low - 1;
+
+    for (let j = low; j <= high; j++) {
+        if (array[j] < pivot) {
+            i++;
+            
+            // Color the two bars to be swapped
+            // 1 = color bars to be swapped
+            animation.push([i, j, 1])
+
+            // swap the bars
+            // 2 = swap bars
+            animation.push([i, j, 2])
+
+            // revert the bar color
+            // 3 = revert color
+            animation.push([i, j, 3])
+
+            let temp = array[j];
+            array[j] = array[i];
+            array[i] = temp;
+        }
+        else {
+            animation.push([j, j, 5]) // current search bar
+            animation.push([j, j, 6]) // revert current search bar
+        }
+    }
+
+    // Color the two bars to be swapped
+    animation.push([i + 1, high, 1])
+
+    // swap the bars
+    animation.push([i + 1, high, 2])
+
+    // revert the bar color
+    animation.push([i + 1, high, 3])
+
+    // color the sorted bar
+    animation.push([i + 1, i + 1, 4])
+
+    let temp = array[i + 1];
+    array[i + 1] = array[high];
+    array[high] = temp;
+
+    return (i + 1);
+}

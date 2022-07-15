@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
-import { bubbleSortAnimation, insertionSortAnimation, selectionSortAnimation } from '../helperFunctions/SortingAnimation';
+import { bubbleSortAnimation, insertionSortAnimation, quickSortAnimation, selectionSortAnimation } from '../helperFunctions/SortingAnimation';
 
 const Graph = () => {
 
@@ -109,31 +109,74 @@ const Graph = () => {
             if (ani[2] === 1) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = CUR_MIN;
-                }, 30 * animationCount)
+                }, 10 * animationCount)
             }
             else if (ani[2] === 2) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = CURRENT;
-                }, 30 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 3) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = UNSORTED
-                }, 30 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 4) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SWAP_VALUE;
                     allBars[ani[1]].style.backgroundColor = SWAP_VALUE;
-                }, 30 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 5) {
                 setTimeout(() => {
                     let temp = allBars[ani[1]].style.height
                     allBars[ani[1]].style.height = allBars[ani[0]].style.height
                     allBars[ani[0]].style.height = temp;
-                }, 30 * animationCount)
+                }, 10 * animationCount)
             } else {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SORTED;
-                }, 30 * animationCount)
+                }, 10 * animationCount)
+            }
+            animationCount++;
+        }
+    }
+
+    const quickSort = () => {
+        const animate = quickSortAnimation(nums);
+        let allBars = document.getElementsByClassName('graph-bars');
+        let animationCount = 0;
+
+        for (let ani of animate) {
+            if (ani[2] === 0) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = "purple"
+                }, 100 * animationCount)
+            } else if (ani[2] === 1) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = SWAP_VALUE;
+                    allBars[ani[1]].style.backgroundColor = SWAP_VALUE;
+                }, 100 * animationCount)
+            } else if (ani[2] === 2) {
+                setTimeout(() => {
+                    let temp = allBars[ani[0]].style.height;
+                    allBars[ani[0]].style.height = allBars[ani[1]].style.height;
+                    allBars[ani[1]].style.height = temp;
+                }, 100 * animationCount)
+            } else if (ani[2] === 3) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = UNSORTED;
+                    allBars[ani[1]].style.backgroundColor = UNSORTED;
+                }, 100 * animationCount)
+            } else if (ani[2] === 4) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = SORTED;
+                }, 100 * animationCount)
+            } else if (ani[2] === 5) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = "yellow";
+                }, 100 * animationCount)
+            } else {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = CURRENT
+                }, 100 * animationCount)
             }
             animationCount++;
         }
@@ -170,7 +213,7 @@ const Graph = () => {
                 insertionSort();
                 break;
             case 'Quick Sort':
-                console.log("quick sort not implemeneted yet.")
+                quickSort();
                 break;
             case 'Merge Sort':
                 console.log("merge sort not implemeneted yet.")
