@@ -114,6 +114,9 @@ export const selectionSortAnimation = (array) => {
 export const quickSortAnimation = (array) => {
     const animation = [];
     quickSort(array, 0, array.length - 1, animation);
+    for (let i = 0; i < array.length; i++) {
+        animation.push([i, i, 4]);
+    }
     return animation;
 }
 
@@ -126,7 +129,9 @@ const quickSort = (array, low, high, animation) => {
 }
 
 const partition = (array, low, high, animation) => {
+
     let pivot = array[high];
+
     //Color the pivot
     // 0 = color pivot
     animation.push([high, high, 0])
@@ -155,7 +160,7 @@ const partition = (array, low, high, animation) => {
         }
         else {
             animation.push([j, j, 5]) // current search bar
-            animation.push([j, j, 6]) // revert current search bar
+            animation.push([j, j, 3]) // revert current search bar
         }
     }
 
@@ -169,7 +174,7 @@ const partition = (array, low, high, animation) => {
     animation.push([i + 1, high, 3])
 
     // color the sorted bar
-    animation.push([i + 1, i + 1, 4])
+    // animation.push([i + 1, i + 1, 4])
 
     let temp = array[i + 1];
     array[i + 1] = array[high];

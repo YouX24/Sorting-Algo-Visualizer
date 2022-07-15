@@ -148,35 +148,31 @@ const Graph = () => {
             if (ani[2] === 0) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = "purple"
-                }, 100 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 1) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SWAP_VALUE;
                     allBars[ani[1]].style.backgroundColor = SWAP_VALUE;
-                }, 100 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 2) {
                 setTimeout(() => {
                     let temp = allBars[ani[0]].style.height;
                     allBars[ani[0]].style.height = allBars[ani[1]].style.height;
                     allBars[ani[1]].style.height = temp;
-                }, 100 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 3) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = UNSORTED;
                     allBars[ani[1]].style.backgroundColor = UNSORTED;
-                }, 100 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 4) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SORTED;
-                }, 100 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 5) {
                 setTimeout(() => {
-                    allBars[ani[0]].style.backgroundColor = "yellow";
-                }, 100 * animationCount)
-            } else {
-                setTimeout(() => {
-                    allBars[ani[0]].style.backgroundColor = CURRENT
-                }, 100 * animationCount)
+                    allBars[ani[0]].style.backgroundColor = CURRENT;
+                }, 10 * animationCount)
             }
             animationCount++;
         }
