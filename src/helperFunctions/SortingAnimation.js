@@ -182,3 +182,62 @@ const partition = (array, low, high, animation) => {
 
     return (i + 1);
 }
+
+export const mergeSortAnimation = (array) => {
+    const animation = [];
+    console.log(array);
+    mergeSort(array, 0, array.length);
+    console.log(array);
+}
+
+const mergeSort = (array, start, end) => {
+    if (start >= end) return;
+    let mid = (start + end) / 2;
+    mergeSort(array, start, mid);
+    mergeSort(array, mid + 1, end);
+    merge(array, start, mid, end);
+}
+
+const merge = (array, start, mid, end) => {
+
+    const firstArrSize = mid - start + 1;
+    const secondArrSize = end - mid;
+
+    const firstArray = [];
+    const secondArray = [];
+
+    for (let i = 0; i < firstArrSize; i++) {
+        firstArray.push(array[start + i]);
+    }
+
+    for (let i = 0; i < secondArrSize; i++) {
+        secondArray.push(array[mid + 1 + i]);
+    }
+    
+    let firstArrIndex = 0;
+    let secondArrIndex = 0;
+    let indexPos = start;
+
+    while (firstArrIndex < firstArrSize && secondArrIndex < secondArrSize) {
+        if (firstArray[firstArrIndex] <= secondArray[secondArrIndex]) {
+            array[indexPos] = firstArray[firstArrIndex];
+            firstArrIndex++;
+        } else {
+            array[indexPos] = secondArray[secondArrIndex]
+            secondArrIndex++;
+        }
+        indexPos++;
+    }
+
+    while (firstArrIndex < firstArrSize) {
+        array[indexPos] = firstArray[firstArrIndex];
+        firstArrIndex++;
+        indexPos++;
+    }
+
+    while (secondArrIndex < secondArrSize) {
+        array[indexPos] = secondArray[secondArrIndex];
+        secondArrIndex++;
+        indexPos++;
+    }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
-import { bubbleSortAnimation, insertionSortAnimation, quickSortAnimation, selectionSortAnimation } from '../helperFunctions/SortingAnimation';
+import { bubbleSortAnimation, insertionSortAnimation, quickSortAnimation, selectionSortAnimation, mergeSortAnimation } from '../helperFunctions/SortingAnimation';
 
 const Graph = () => {
 
@@ -178,6 +178,10 @@ const Graph = () => {
         }
     }
 
+    const mergeSort = () => {
+        mergeSortAnimation(nums)
+    }
+
     // Holds the current algorithm to be used
     const [currentAlgorithm, setCurrentAlgorithm] = useState('Bubble Sort');
 
@@ -212,7 +216,7 @@ const Graph = () => {
                 quickSort();
                 break;
             case 'Merge Sort':
-                console.log("merge sort not implemeneted yet.")
+                mergeSort();
                 break;
             default:
                 console.log("algorithm not implemeneted yet.")
