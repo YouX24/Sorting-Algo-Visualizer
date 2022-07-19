@@ -186,20 +186,21 @@ const partition = (array, low, high, animation) => {
 export const mergeSortAnimation = (array) => {
     const animation = [];
     console.log(array);
-    mergeSort(array, 0, array.length - 1);
+    mergeSort(array, 0, array.length - 1, animation);
     console.log(array);
+    return animation;
 }
 
-const mergeSort = (array, start, end) => {
+const mergeSort = (array, start, end, animation) => {
     if (start < end) {
         let mid = Math.floor((start + end) / 2);
-        mergeSort(array, start, mid);
-        mergeSort(array, mid + 1, end);
-        merge(array, start, mid, end);
+        mergeSort(array, start, mid, animation);
+        mergeSort(array, mid + 1, end, animation);
+        merge(array, start, mid, end, animation);
     }
 }
 
-const merge = (array, start, mid, end) => {
+const merge = (array, start, mid, end, animation) => {
 
     const firstArrSize = mid - start + 1;
     const secondArrSize = end - mid;
@@ -215,31 +216,55 @@ const merge = (array, start, mid, end) => {
         secondArray.push(array[mid + 1 + i]);
     }
 
-    console.log(`first array: ${firstArray}`)
-    console.log(`second array: ${secondArray}`)
+    // console.log(`first array: ${firstArray}`)
+    // console.log(`second array: ${secondArray}`)
     
     let firstArrIndex = 0;
     let secondArrIndex = 0;
     let indexPos = start;
 
+    let arrayIndex1 = start;
+    let arrayIndex2 = mid + 1;
+
     while (firstArrIndex < firstArrSize && secondArrIndex < secondArrSize) {
         if (firstArray[firstArrIndex] <= secondArray[secondArrIndex]) {
+            // animation here
+            animation.push([arrayIndex1, indexPos, 0]) // change these two index color
+            animation.push([arrayIndex1, indexPos, 1]) // swap these two index values
+            animation.push([arrayIndex1, indexPos, 2]) // revert these two index colors
+
             array[indexPos] = firstArray[firstArrIndex];
             firstArrIndex++;
+            arrayIndex1++;
         } else {
+            // animation here
+            animation.push([arrayIndex2, indexPos, 0]) // change these two index color
+            animation.push([arrayIndex2, indexPos, 1]) // swap these two index values
+            animation.push([arrayIndex2, indexPos, 2]) // revert these two index colors
             array[indexPos] = secondArray[secondArrIndex]
             secondArrIndex++;
+            arrayIndex2++;
         }
         indexPos++;
     }
 
     while (firstArrIndex < firstArrSize) {
+        // animation here
+        animation.push([arrayIndex1, indexPos, 0]) // change these two index color
+        animation.push([arrayIndex1, indexPos, 1]) // swap these two index values
+        animation.push([arrayIndex1, indexPos, 2]) // revert these two index colors
+
         array[indexPos] = firstArray[firstArrIndex];
         firstArrIndex++;
         indexPos++;
     }
 
     while (secondArrIndex < secondArrSize) {
+        // animation here
+        animation.push([arrayIndex2, indexPos, 0]) // change these two index color
+        animation.push([arrayIndex2, indexPos, 1]) // swap these two index values
+        animation.push([arrayIndex2, indexPos, 2]) // revert these two index colors
+
         array[indexPos] = secondArray[secondArrIndex];
         secondArrIndex++;
         indexPos++;

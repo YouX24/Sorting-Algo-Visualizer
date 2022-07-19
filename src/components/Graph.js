@@ -179,7 +179,30 @@ const Graph = () => {
     }
 
     const mergeSort = () => {
-        mergeSortAnimation(nums)
+        const animate = mergeSortAnimation(nums)
+        let allBars = document.getElementsByClassName('graph-bars');
+        let animationCount = 0;
+
+        for (let ani of animate) {
+            if (ani[2] === 0) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = CURRENT
+                    allBars[ani[1]].style.backgroundColor = CURRENT
+                }, 500 * animationCount)
+            } else if (ani[2] === 1) {
+                setTimeout(() => {
+                    const temp = allBars[ani[0]].style.height;
+                    allBars[ani[0]].style.height = allBars[ani[1]].style.height;
+                    allBars[ani[1]].style.height = temp;
+                }, 500 * animationCount)
+            } else if (ani[2] === 2) {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = UNSORTED
+                    allBars[ani[2]].style.backgroundColor = UNSORTED
+                }, 500 * animationCount)
+            }
+            animationCount++;
+        }
     }
 
     // Holds the current algorithm to be used
