@@ -186,16 +186,17 @@ const partition = (array, low, high, animation) => {
 export const mergeSortAnimation = (array) => {
     const animation = [];
     console.log(array);
-    mergeSort(array, 0, array.length);
+    mergeSort(array, 0, array.length - 1);
     console.log(array);
 }
 
 const mergeSort = (array, start, end) => {
-    if (start >= end) return;
-    let mid = (start + end) / 2;
-    mergeSort(array, start, mid);
-    mergeSort(array, mid + 1, end);
-    merge(array, start, mid, end);
+    if (start < end) {
+        let mid = Math.floor((start + end) / 2);
+        mergeSort(array, start, mid);
+        mergeSort(array, mid + 1, end);
+        merge(array, start, mid, end);
+    }
 }
 
 const merge = (array, start, mid, end) => {
@@ -203,8 +204,8 @@ const merge = (array, start, mid, end) => {
     const firstArrSize = mid - start + 1;
     const secondArrSize = end - mid;
 
-    const firstArray = [];
-    const secondArray = [];
+    const firstArray = []
+    const secondArray = []
 
     for (let i = 0; i < firstArrSize; i++) {
         firstArray.push(array[start + i]);
@@ -213,6 +214,9 @@ const merge = (array, start, mid, end) => {
     for (let i = 0; i < secondArrSize; i++) {
         secondArray.push(array[mid + 1 + i]);
     }
+
+    console.log(`first array: ${firstArray}`)
+    console.log(`second array: ${secondArray}`)
     
     let firstArrIndex = 0;
     let secondArrIndex = 0;

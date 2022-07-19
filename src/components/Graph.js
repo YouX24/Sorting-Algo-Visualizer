@@ -12,7 +12,7 @@ const Graph = () => {
 
     const createArray = () => {
         const array = []
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < 5; i++) {
             array.push(Math.floor(Math.random() * 400) + 1)
         }
         return array;
