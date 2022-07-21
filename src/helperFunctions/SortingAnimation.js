@@ -215,9 +215,6 @@ const merge = (array, start, mid, end, animation) => {
     for (let i = 0; i < secondArrSize; i++) {
         secondArray.push(array[mid + 1 + i]);
     }
-
-    // console.log(`first array: ${firstArray}`)
-    // console.log(`second array: ${secondArray}`)
     
     let firstArrIndex = 0;
     let secondArrIndex = 0;
@@ -230,7 +227,7 @@ const merge = (array, start, mid, end, animation) => {
         if (firstArray[firstArrIndex] <= secondArray[secondArrIndex]) {
             // animation here
             animation.push([arrayIndex1, indexPos, 0]) // change these two index color
-            animation.push([arrayIndex1, indexPos, 1]) // swap these two index values
+            animation.push([firstArray[firstArrIndex], indexPos, 1]) // swap these two index values
             animation.push([arrayIndex1, indexPos, 2]) // revert these two index colors
 
             array[indexPos] = firstArray[firstArrIndex];
@@ -239,8 +236,9 @@ const merge = (array, start, mid, end, animation) => {
         } else {
             // animation here
             animation.push([arrayIndex2, indexPos, 0]) // change these two index color
-            animation.push([arrayIndex2, indexPos, 1]) // swap these two index values
+            animation.push([secondArray[secondArrIndex], indexPos, 1]) // swap these two index values
             animation.push([arrayIndex2, indexPos, 2]) // revert these two index colors
+
             array[indexPos] = secondArray[secondArrIndex]
             secondArrIndex++;
             arrayIndex2++;
@@ -251,9 +249,9 @@ const merge = (array, start, mid, end, animation) => {
     while (firstArrIndex < firstArrSize) {
         // animation here
         animation.push([arrayIndex1, indexPos, 0]) // change these two index color
-        animation.push([arrayIndex1, indexPos, 1]) // swap these two index values
+        animation.push([firstArray[firstArrIndex], indexPos, 1]) // swap these two index values
         animation.push([arrayIndex1, indexPos, 2]) // revert these two index colors
-
+        arrayIndex1++;
         array[indexPos] = firstArray[firstArrIndex];
         firstArrIndex++;
         indexPos++;
@@ -262,9 +260,9 @@ const merge = (array, start, mid, end, animation) => {
     while (secondArrIndex < secondArrSize) {
         // animation here
         animation.push([arrayIndex2, indexPos, 0]) // change these two index color
-        animation.push([arrayIndex2, indexPos, 1]) // swap these two index values
+        animation.push([secondArray[secondArrIndex], indexPos, 1]) // swap these two index values
         animation.push([arrayIndex2, indexPos, 2]) // revert these two index colors
-
+        arrayIndex2++;
         array[indexPos] = secondArray[secondArrIndex];
         secondArrIndex++;
         indexPos++;
