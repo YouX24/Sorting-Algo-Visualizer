@@ -12,7 +12,7 @@ const Graph = () => {
 
     const createArray = () => {
         const array = []
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < 50; i++) {
             array.push(Math.floor(Math.random() * 400) + 1)
         }
         return array;
@@ -186,20 +186,16 @@ const Graph = () => {
         for (let ani of animate) {
             if (ani[2] === 0) {
                 setTimeout(() => {
-                    allBars[ani[0]].style.backgroundColor = CURRENT
                     allBars[ani[1]].style.backgroundColor = CURRENT
-                }, 500 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 1) {
                 setTimeout(() => {
-                    const temp = allBars[ani[1]].style.height;
                     allBars[ani[1]].style.height = ani[0] + 'px';
-                    allBars[ani[0]].style.height = temp;
-                }, 500 * animationCount)
+                }, 10 * animationCount)
             } else if (ani[2] === 2) {
                 setTimeout(() => {
-                    allBars[ani[0]].style.backgroundColor = UNSORTED
                     allBars[ani[1]].style.backgroundColor = UNSORTED
-                }, 500 * animationCount)
+                }, 10 * animationCount)
             }
             animationCount++;
         }
