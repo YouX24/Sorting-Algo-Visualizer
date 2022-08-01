@@ -43,7 +43,6 @@ header {
     justify-content: center;
     gap: 1rem;
     position: absolute;
-    visibility: hidden;
     cursor: pointer;
     top: 2.5rem;
 }

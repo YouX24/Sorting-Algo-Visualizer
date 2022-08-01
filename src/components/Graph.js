@@ -10,9 +10,27 @@ const Graph = () => {
     const CUR_MIN = 'pink';
     const SWAP_VALUE = '#BF40BF'
 
+    let speed = 10
+    const SLOW = 15;
+    const REG = 10;
+    const FAST = 5;
+    const VERYFAST = 1;
+
+    const disableBtns = () => {
+        document.getElementById('algo-btn').disabled = true;
+        document.getElementById('gen-new-array-btn').disabled = true;
+        document.getElementById('sort-btn').disabled = true;
+    }
+
+    const enableBtns = () => {
+        document.getElementById('algo-btn').disabled = false;
+        document.getElementById('gen-new-array-btn').disabled = false;
+        document.getElementById('sort-btn').disabled = false;
+    }
+
     const createArray = () => {
-        const array = []
-        for (let i = 0; i < 50; i++) {
+        const array = [];
+        for (let i = 0; i < 100; i++) {
             array.push(Math.floor(Math.random() * 400) + 1)
         }
         return array;
@@ -47,25 +65,29 @@ const Graph = () => {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = CURRENT
                     allBars[ani[1]].style.backgroundColor = CURRENT
-                }, 5 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 1) {
                 setTimeout(() => {
                     let temp = allBars[ani[0]].style.height;
                     allBars[ani[0]].style.height = allBars[ani[1]].style.height;
                     allBars[ani[1]].style.height = temp;
-                }, 5 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 3) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SORTED
-                }, 5 * animationCount)
+                }, speed * animationCount)
             } else {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = UNSORTED
                     allBars[ani[1]].style.backgroundColor = UNSORTED
-                }, 5 * animationCount)
+                }, speed * animationCount)
             }
             animationCount++;
         }
+
+        setTimeout(() => {
+            enableBtns();
+        }, speed * animationCount)
     }
 
     const insertionSort = () => {
@@ -78,26 +100,30 @@ const Graph = () => {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = CURRENT
                     allBars[ani[1]].style.backgroundColor = CURRENT
-                }, 10 * animationCount)
+                }, speed * animationCount)
             }
             else if (ani[2] === 1) {
                 setTimeout(() => {
                     let temp = allBars[ani[0]].style.height;
                     allBars[ani[0]].style.height = allBars[ani[1]].style.height;
                     allBars[ani[1]].style.height = temp;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 2) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = UNSORTED
                     allBars[ani[1]].style.backgroundColor = UNSORTED
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SORTED
-                }, 10 * animationCount)
+                }, speed * animationCount)
             }
             animationCount++;
         }
+
+        setTimeout(() => {
+            enableBtns();
+        }, speed * animationCount)
     }
 
     const selectionSort = () => {
@@ -109,37 +135,42 @@ const Graph = () => {
             if (ani[2] === 1) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = CUR_MIN;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             }
             else if (ani[2] === 2) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = CURRENT;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 3) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = UNSORTED
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 4) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SWAP_VALUE;
                     allBars[ani[1]].style.backgroundColor = SWAP_VALUE;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 5) {
                 setTimeout(() => {
                     let temp = allBars[ani[1]].style.height
                     allBars[ani[1]].style.height = allBars[ani[0]].style.height
                     allBars[ani[0]].style.height = temp;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SORTED;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             }
             animationCount++;
         }
+
+        setTimeout(() => {
+            enableBtns();
+        }, speed * animationCount)
     }
 
     const quickSort = () => {
+        console.log(nums)
         const animate = quickSortAnimation(nums);
         let allBars = document.getElementsByClassName('graph-bars');
         let animationCount = 0;
@@ -148,34 +179,39 @@ const Graph = () => {
             if (ani[2] === 0) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = "purple"
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 1) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SWAP_VALUE;
                     allBars[ani[1]].style.backgroundColor = SWAP_VALUE;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 2) {
                 setTimeout(() => {
                     let temp = allBars[ani[0]].style.height;
+                    console.log(temp)
                     allBars[ani[0]].style.height = allBars[ani[1]].style.height;
                     allBars[ani[1]].style.height = temp;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 3) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = UNSORTED;
                     allBars[ani[1]].style.backgroundColor = UNSORTED;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 4) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = SORTED;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 5) {
                 setTimeout(() => {
                     allBars[ani[0]].style.backgroundColor = CURRENT;
-                }, 10 * animationCount)
+                }, speed * animationCount)
             }
             animationCount++;
         }
+
+        setTimeout(() => {
+            enableBtns();
+        }, speed * animationCount)
     }
 
     const mergeSort = () => {
@@ -186,26 +222,36 @@ const Graph = () => {
         for (let ani of animate) {
             if (ani[2] === 0) {
                 setTimeout(() => {
-                    allBars[ani[1]].style.backgroundColor = CURRENT
-                }, 10 * animationCount)
+                    allBars[ani[1]].style.backgroundColor = CURRENT;
+                }, speed * animationCount)
             } else if (ani[2] === 1) {
                 setTimeout(() => {
                     allBars[ani[1]].style.height = ani[0] + 'px';
-                }, 10 * animationCount)
+                }, speed * animationCount)
             } else if (ani[2] === 2) {
                 setTimeout(() => {
-                    allBars[ani[1]].style.backgroundColor = UNSORTED
-                }, 10 * animationCount)
+                    allBars[ani[1]].style.backgroundColor = UNSORTED;
+                }, speed * animationCount)
+            } else {
+                setTimeout(() => {
+                    allBars[ani[0]].style.backgroundColor = SORTED;
+                }, speed * animationCount)
             }
             animationCount++;
         }
+
+        setTimeout(() => {
+            enableBtns();
+        }, speed * animationCount)
     }
 
     // Holds the current algorithm to be used
     const [currentAlgorithm, setCurrentAlgorithm] = useState('Bubble Sort');
+    const [currentSpeed, setCurrentSpeed] = useState('Slow')
 
     // Drop down
     const activeAlgorithms = () => {
+        console.log('clicked')
         const dropDownBtn = document.getElementById('sorting-algorithms')
         if (dropDownBtn.style.visibility === 'hidden') {
             dropDownBtn.style.visibility = 'visible';
@@ -216,11 +262,24 @@ const Graph = () => {
 
     // Change algorithm to be used
     const changeAlgorithm = (event) => {
-        setCurrentAlgorithm(event.target.innerHTML)
+        setCurrentAlgorithm(event.target.innerHTML);
+        generateNewArray();
+        document.getElementById('sorting-algorithms').style.visibility = 'hidden';
+    }
+
+    const activeSpeed = () => {
+        
+    }
+
+    const changeSpeed = (event) => {
+
     }
 
     // Sort using the current selected algorithm
     const sort = () => {
+        disableBtns();
+        document.getElementById('sorting-algorithms').style.visibility = 'hidden';
+
         switch(currentAlgorithm) {
             case 'Bubble Sort':
                 bubbleSort();
@@ -242,12 +301,17 @@ const Graph = () => {
         }
     }
 
+    // change disabled btns to color red
+    // change enabled btns to color green
+    // add change array size feature
+    // add change speed feature
+
     return (
         <section>
             <div className='btns'>
                 <div className="sort-container">
-                    <button onClick={activeAlgorithms}>{currentAlgorithm}</button>
-                    <div id='sorting-algorithms' className='sorting-algorithms'>
+                    <button id="algo-btn" onClick={activeAlgorithms}>{currentAlgorithm} <i class="fa-solid fa-angle-down"></i></button>
+                    <div id='sorting-algorithms' className='sorting-algorithms' style={{visibility: 'hidden'}}>
                         <button onClick={changeAlgorithm}>Bubble Sort</button>
                         <button onClick={changeAlgorithm}>Selection Sort</button>
                         <button onClick={changeAlgorithm}>Insertion Sort</button>
@@ -255,8 +319,16 @@ const Graph = () => {
                         <button onClick={changeAlgorithm}>Merge Sort</button>
                     </div>
                 </div>
-                <button onClick={generateNewArray}>Generate New Array</button>
-                <button onClick={sort}>Sort</button>
+                <div className="speed-container">
+                    <button id="speed-btn" onClick={activeSpeed}>Animation Speed : {currentSpeed} <i class="fa-solid fa-angle-down"></i></button>
+                    <div id='sorting-algorithms' className='sorting-algorithms' style={{visibility: 'hidden'}}> /* change id and className */
+                        <button onClick={changeSpeed}>Slow</button>
+                        <button onClick={changeSpeed}>Fast</button>
+                        <button onClick={changeSpeed}>Very Fast</button>
+                    </div>
+                </div>
+                <button id="gen-new-array-btn" onClick={generateNewArray}>Generate New Array</button>
+                <button id="sort-btn" onClick={sort}>Sort</button>
             </div>
             <div className='graph-container'>
                 <div className='graph' style={{display: 'grid', gridTemplateColumns: 'repeat(' + nums.length + ', 10px)'}}>

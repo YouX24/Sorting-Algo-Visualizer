@@ -124,7 +124,7 @@ const quickSort = (array, low, high, animation) => {
     if (low < high) {
         let pivotIndex = partition(array, low, high, animation);
         quickSort(array, low, pivotIndex - 1, animation);
-        quickSort(array, pivotIndex + 1, high, animation);
+        quickSort(array, pivotIndex  + 1, high, animation);
     }
 }
 
@@ -138,11 +138,11 @@ const partition = (array, low, high, animation) => {
 
     let i = low - 1;
 
-    for (let j = low; j <= high; j++) {
+    for (let j = low; j <= high - 1; j++) {
         if (array[j] < pivot) {
             i++;
             
-            // Color the two bars to be swapped
+            // Color the two bars to be swappe
             // 1 = color bars to be swapped
             animation.push([i, j, 1])
 
@@ -173,9 +173,6 @@ const partition = (array, low, high, animation) => {
     // revert the bar color
     animation.push([i + 1, high, 3])
 
-    // color the sorted bar
-    // animation.push([i + 1, i + 1, 4])
-
     let temp = array[i + 1];
     array[i + 1] = array[high];
     array[high] = temp;
@@ -185,9 +182,11 @@ const partition = (array, low, high, animation) => {
 
 export const mergeSortAnimation = (array) => {
     const animation = [];
-    console.log(array);
     mergeSort(array, 0, array.length - 1, animation);
-    console.log(array);
+    // for each bar, set color to green = sorted
+    for (let i = 0; i < array.length; i++) {
+        animation.push([i, i, 3])
+    }
     return animation;
 }
 
