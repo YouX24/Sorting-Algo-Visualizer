@@ -29,14 +29,14 @@ header {
     gap: 1rem;
 }
 
-.sort-container {
+.sort-container, .speed-container {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
 
-.sorting-algorithms {
+.sorting-algorithms, .speed-selection {
     display: flex;
     flex-direction: column;
     align-items: center;

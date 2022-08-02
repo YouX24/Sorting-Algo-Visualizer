@@ -1,4 +1,3 @@
-import React from 'react';
 import {useState} from 'react';
 import { bubbleSortAnimation, insertionSortAnimation, quickSortAnimation, selectionSortAnimation, mergeSortAnimation } from '../helperFunctions/SortingAnimation';
 
@@ -10,27 +9,26 @@ const Graph = () => {
     const CUR_MIN = 'pink';
     const SWAP_VALUE = '#BF40BF'
 
-    let speed = 10
-    const SLOW = 15;
-    const REG = 10;
-    const FAST = 5;
-    const VERYFAST = 1;
+    const [speed, setSpeed] = useState(10);
+    const [arraySize, setArraySize] = useState(50);
 
     const disableBtns = () => {
         document.getElementById('algo-btn').disabled = true;
         document.getElementById('gen-new-array-btn').disabled = true;
         document.getElementById('sort-btn').disabled = true;
+        document.getElementById('speed-btn').disabled = true;
     }
 
     const enableBtns = () => {
         document.getElementById('algo-btn').disabled = false;
         document.getElementById('gen-new-array-btn').disabled = false;
         document.getElementById('sort-btn').disabled = false;
+        document.getElementById('speed-btn').disabled = false;
     }
 
     const createArray = () => {
         const array = [];
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < arraySize; i++) {
             array.push(Math.floor(Math.random() * 400) + 1)
         }
         return array;
@@ -53,6 +51,7 @@ const Graph = () => {
         for (let bar of allBars) {
             bar.style.backgroundColor = UNSORTED
         }
+        console.log('array size changed: ' + allBars.length)
     }
 
     const bubbleSort = () => {
@@ -170,7 +169,6 @@ const Graph = () => {
     }
 
     const quickSort = () => {
-        console.log(nums)
         const animate = quickSortAnimation(nums);
         let allBars = document.getElementsByClassName('graph-bars');
         let animationCount = 0;
@@ -247,16 +245,16 @@ const Graph = () => {
 
     // Holds the current algorithm to be used
     const [currentAlgorithm, setCurrentAlgorithm] = useState('Bubble Sort');
-    const [currentSpeed, setCurrentSpeed] = useState('Slow')
+    const [currentSpeed, setCurrentSpeed] = useState('Fast')
 
     // Drop down
-    const activeAlgorithms = () => {
+    const showAlgorithms = () => {
         console.log('clicked')
         const dropDownBtn = document.getElementById('sorting-algorithms')
         if (dropDownBtn.style.visibility === 'hidden') {
             dropDownBtn.style.visibility = 'visible';
         } else {
-            dropDownBtn.style.visibility = 'hidden'
+            dropDownBtn.style.visibility = 'hidden';
         }
     }
 
@@ -267,18 +265,38 @@ const Graph = () => {
         document.getElementById('sorting-algorithms').style.visibility = 'hidden';
     }
 
-    const activeSpeed = () => {
-        
+    const showSpeeds = () => {
+        const animationSpeedBtn = document.getElementById('speed-selection');
+        if (animationSpeedBtn.style.visibility === 'hidden') {
+            animationSpeedBtn.style.visibility = 'visible';
+        } else {
+            animationSpeedBtn.style.visibility = 'hidden';
+        }
     }
 
     const changeSpeed = (event) => {
-
+        setCurrentSpeed(event.target.innerHTML);
+        switch(event.target.innerHTML) {
+            case 'Slow':
+                setSpeed(50);
+                break;
+            case 'Fast':
+                setSpeed(10);
+                break;
+            case 'Very Fast':
+                setSpeed(1);
+                break;
+            default:
+                console.log("There was an error. No such speed exists.")
+        }
+        document.getElementById('speed-selection').style.visibility = 'hidden';
     }
 
     // Sort using the current selected algorithm
     const sort = () => {
         disableBtns();
         document.getElementById('sorting-algorithms').style.visibility = 'hidden';
+        document.getElementById('speed-selection').style.visibility = 'hidden';
 
         switch(currentAlgorithm) {
             case 'Bubble Sort':
@@ -301,16 +319,22 @@ const Graph = () => {
         }
     }
 
+    const changeSize = () => {
+        const sizeRange = document.querySelector('.array-size-range');
+        setArraySize(sizeRange.value);
+        console.log('size changed: ' + sizeRange.value)
+        generateNewArray();
+    }
+
     // change disabled btns to color red
     // change enabled btns to color green
     // add change array size feature
-    // add change speed feature
 
     return (
         <section>
             <div className='btns'>
                 <div className="sort-container">
-                    <button id="algo-btn" onClick={activeAlgorithms}>{currentAlgorithm} <i class="fa-solid fa-angle-down"></i></button>
+                    <button id="algo-btn" onClick={showAlgorithms}>{currentAlgorithm} <i className="fa-solid fa-angle-down"></i></button>
                     <div id='sorting-algorithms' className='sorting-algorithms' style={{visibility: 'hidden'}}>
                         <button onClick={changeAlgorithm}>Bubble Sort</button>
                         <button onClick={changeAlgorithm}>Selection Sort</button>
@@ -320,12 +344,16 @@ const Graph = () => {
                     </div>
                 </div>
                 <div className="speed-container">
-                    <button id="speed-btn" onClick={activeSpeed}>Animation Speed : {currentSpeed} <i class="fa-solid fa-angle-down"></i></button>
-                    <div id='sorting-algorithms' className='sorting-algorithms' style={{visibility: 'hidden'}}> /* change id and className */
+                    <button id="speed-btn" onClick={showSpeeds}>Animation Speed : {currentSpeed} <i className="fa-solid fa-angle-down"></i></button>
+                    <div id='speed-selection' className='speed-selection' style={{visibility: 'hidden'}}>
                         <button onClick={changeSpeed}>Slow</button>
                         <button onClick={changeSpeed}>Fast</button>
                         <button onClick={changeSpeed}>Very Fast</button>
                     </div>
+                </div>
+                <div>
+                    <input className="array-size-range" onChange={changeSize} type="range" min="2" max="100" name="array-size"/>
+                    <label for="array-size">Size</label>
                 </div>
                 <button id="gen-new-array-btn" onClick={generateNewArray}>Generate New Array</button>
                 <button id="sort-btn" onClick={sort}>Sort</button>
