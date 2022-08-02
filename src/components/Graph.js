@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { bubbleSortAnimation, insertionSortAnimation, quickSortAnimation, selectionSortAnimation, mergeSortAnimation } from '../helperFunctions/SortingAnimation';
 
 const Graph = () => {
@@ -17,6 +17,7 @@ const Graph = () => {
         document.getElementById('gen-new-array-btn').disabled = true;
         document.getElementById('sort-btn').disabled = true;
         document.getElementById('speed-btn').disabled = true;
+        document.getElementById('size-slider').disabled = true;
     }
 
     const enableBtns = () => {
@@ -24,6 +25,7 @@ const Graph = () => {
         document.getElementById('gen-new-array-btn').disabled = false;
         document.getElementById('sort-btn').disabled = false;
         document.getElementById('speed-btn').disabled = false;
+        document.getElementById('size-slider').disabled = false;
     }
 
     const createArray = () => {
@@ -51,7 +53,7 @@ const Graph = () => {
         for (let bar of allBars) {
             bar.style.backgroundColor = UNSORTED
         }
-        console.log('array size changed: ' + allBars.length)
+        console.log('generateNewArray triggered.')
     }
 
     const bubbleSort = () => {
@@ -322,9 +324,12 @@ const Graph = () => {
     const changeSize = () => {
         const sizeRange = document.querySelector('.array-size-range');
         setArraySize(sizeRange.value);
-        console.log('size changed: ' + sizeRange.value)
-        generateNewArray();
     }
+
+    useEffect(() => {
+        generateNewArray()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [arraySize])
 
     // change disabled btns to color red
     // change enabled btns to color green
@@ -352,7 +357,7 @@ const Graph = () => {
                     </div>
                 </div>
                 <div>
-                    <input className="array-size-range" onChange={changeSize} type="range" min="2" max="100" name="array-size"/>
+                    <input id="size-slider" className="array-size-range" onChange={changeSize} type="range" min="2" max="100" name="array-size"/>
                     <label for="array-size">Size</label>
                 </div>
                 <button id="gen-new-array-btn" onClick={generateNewArray}>Generate New Array</button>
