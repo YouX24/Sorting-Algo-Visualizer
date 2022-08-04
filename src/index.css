@@ -4,10 +4,17 @@
 
 body {
     margin: 0;
+    background-color: #4f5f76;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    height: 100vh;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 header {
-    background-color: #3B8BEB;
+    background-color: #0f2862;
     height: 70px;
     padding: 1rem;
     display: flex;
@@ -41,14 +48,73 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
     position: absolute;
     cursor: pointer;
-    top: 2.5rem;
+    top: 2rem;
 }
 
 .graph-container {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 50px;
+}
+
+button {
+    color: white;
+    padding: .50rem 1rem;
+    cursor: pointer;
+    border: none;
+    outline: 1px solid black;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+i {
+    padding-left: 0.5rem;
+}
+
+.active-btn {
+    background-color: #845BB3;
+}
+
+.active-btn:hover {
+    background-color: #764ea3;
+}
+
+.inactive-btn {
+    background-color: #FF2E2E;
+    pointer-events: none;
+}
+
+.first-btn {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.last-btn {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.rounded-btn {
+    border-radius: 5px;
+}
+
+.sort-algo-btn {
+    width: 140px;
+}
+
+.animation-speed-btn {
+    width: 225px;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.slider-container > label {
+    color: white;
 }

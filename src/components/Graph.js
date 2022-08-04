@@ -13,19 +13,49 @@ const Graph = () => {
     const [arraySize, setArraySize] = useState(50);
 
     const disableBtns = () => {
-        document.getElementById('algo-btn').disabled = true;
-        document.getElementById('gen-new-array-btn').disabled = true;
-        document.getElementById('sort-btn').disabled = true;
-        document.getElementById('speed-btn').disabled = true;
-        document.getElementById('size-slider').disabled = true;
+        const algoBtn = document.getElementById('algo-btn');
+        const genNewArrayBtn = document.getElementById('gen-new-array-btn');
+        const sortBtn = document.getElementById('sort-btn');
+        const speedBtn = document.getElementById('speed-btn');
+        const sizeSlider = document.getElementById('size-slider');
+
+        algoBtn.disabled = true;
+        genNewArrayBtn.disabled = true;
+        sortBtn.disabled = true;
+        speedBtn.disabled = true;
+        sizeSlider.disabled = true;
+
+        algoBtn.classList.remove('active-btn');
+        algoBtn.classList.add('inactive-btn');
+        genNewArrayBtn.classList.remove('active-btn');
+        genNewArrayBtn.classList.add('inactive-btn');
+        sortBtn.classList.remove('active-btn');
+        sortBtn.classList.add('inactive-btn');
+        speedBtn.classList.remove('active-btn');
+        speedBtn.classList.add('inactive-btn');
     }
 
     const enableBtns = () => {
-        document.getElementById('algo-btn').disabled = false;
-        document.getElementById('gen-new-array-btn').disabled = false;
-        document.getElementById('sort-btn').disabled = false;
-        document.getElementById('speed-btn').disabled = false;
-        document.getElementById('size-slider').disabled = false;
+        const algoBtn = document.getElementById('algo-btn');
+        const genNewArrayBtn = document.getElementById('gen-new-array-btn');
+        const sortBtn = document.getElementById('sort-btn');
+        const speedBtn = document.getElementById('speed-btn');
+        const sizeSlider = document.getElementById('size-slider');
+
+        algoBtn.disabled = false;
+        genNewArrayBtn.disabled = false;
+        sortBtn.disabled = false;
+        speedBtn.disabled = false;
+        sizeSlider.disabled = false;
+
+        algoBtn.classList.remove('inactive-btn');
+        algoBtn.classList.add('active-btn');
+        genNewArrayBtn.classList.remove('inactive-btn');
+        genNewArrayBtn.classList.add('active-btn');
+        sortBtn.classList.remove('inactive-btn');
+        sortBtn.classList.add('active-btn');
+        speedBtn.classList.remove('inactive-btn');
+        speedBtn.classList.add('active-btn');
     }
 
     const createArray = () => {
@@ -336,32 +366,32 @@ const Graph = () => {
     // add change array size feature
 
     return (
-        <section>
+        <section className="container">
             <div className='btns'>
                 <div className="sort-container">
-                    <button id="algo-btn" onClick={showAlgorithms}>{currentAlgorithm} <i className="fa-solid fa-angle-down"></i></button>
+                    <button id="algo-btn" className="sort-algo-btn first-btn active-btn" onClick={showAlgorithms}>{currentAlgorithm} <i className="fa-solid fa-angle-down"></i></button>
                     <div id='sorting-algorithms' className='sorting-algorithms' style={{visibility: 'hidden'}}>
-                        <button onClick={changeAlgorithm}>Bubble Sort</button>
-                        <button onClick={changeAlgorithm}>Selection Sort</button>
-                        <button onClick={changeAlgorithm}>Insertion Sort</button>
-                        <button onClick={changeAlgorithm}>Quick Sort</button>
-                        <button onClick={changeAlgorithm}>Merge Sort</button>
+                        <button className="sort-algo-btn active-btn" onClick={changeAlgorithm}>Bubble Sort</button>
+                        <button className="sort-algo-btn active-btn" onClick={changeAlgorithm}>Selection Sort</button>
+                        <button className="sort-algo-btn active-btn" onClick={changeAlgorithm}>Insertion Sort</button>
+                        <button className="sort-algo-btn active-btn" onClick={changeAlgorithm}>Quick Sort</button>
+                        <button className="sort-algo-btn active-btn last-btn" onClick={changeAlgorithm}>Merge Sort</button>
                     </div>
                 </div>
                 <div className="speed-container">
-                    <button id="speed-btn" onClick={showSpeeds}>Animation Speed : {currentSpeed} <i className="fa-solid fa-angle-down"></i></button>
+                    <button id="speed-btn" className="animation-speed-btn first-btn active-btn" onClick={showSpeeds}>Animation Speed : {currentSpeed} <i className="fa-solid fa-angle-down"></i></button>
                     <div id='speed-selection' className='speed-selection' style={{visibility: 'hidden'}}>
-                        <button onClick={changeSpeed}>Slow</button>
-                        <button onClick={changeSpeed}>Fast</button>
-                        <button onClick={changeSpeed}>Very Fast</button>
+                        <button className="animation-speed-btn active-btn" onClick={changeSpeed}>Slow</button>
+                        <button className="animation-speed-btn active-btn" onClick={changeSpeed}>Fast</button>
+                        <button className="animation-speed-btn active-btn last-btn" onClick={changeSpeed}>Very Fast</button>
                     </div>
                 </div>
-                <div>
+                <div className="slider-container">
                     <input id="size-slider" className="array-size-range" onChange={changeSize} type="range" min="2" max="100" name="array-size"/>
-                    <label for="array-size">Size</label>
+                    <label for="array-size">Array Size</label>
                 </div>
-                <button id="gen-new-array-btn" onClick={generateNewArray}>Generate New Array</button>
-                <button id="sort-btn" onClick={sort}>Sort</button>
+                <button id="gen-new-array-btn" className="rounded-btn active-btn" onClick={generateNewArray}>Generate New Array</button>
+                <button id="sort-btn" className="rounded-btn active-btn" onClick={sort}>Sort</button>
             </div>
             <div className='graph-container'>
                 <div className='graph' style={{display: 'grid', gridTemplateColumns: 'repeat(' + nums.length + ', 10px)'}}>
