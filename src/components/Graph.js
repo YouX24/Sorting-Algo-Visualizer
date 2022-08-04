@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { bubbleSortAnimation, insertionSortAnimation, quickSortAnimation, selectionSortAnimation, mergeSortAnimation } from '../helperFunctions/SortingAnimation';
+import { bubbleSortAnimation, insertionSortAnimation, quickSortAnimation, selectionSortAnimation, mergeSortAnimation } from '../sorting-algorithms/SortingAnimation';
 
 const Graph = () => {
 
@@ -59,9 +59,6 @@ const Graph = () => {
     }
 
     const createArray = () => {
-        // const array = [51, 66, 184, 246, 278, 280, 295, 298, 301, 327, 342, 345, 371];
-        // const array = [7, 160, 23, 219, 42, 288, 322, 304, 361, 272, 21];
-        // const array = [247, 235, 367, 87, 366, 79, 124, 260, 189]
         const array = [];
         for (let i = 0; i < arraySize; i++) {
             array.push(Math.floor(Math.random() * 400) + 1)
@@ -358,10 +355,6 @@ const Graph = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [arraySize])
 
-    // change disabled btns to color red
-    // change enabled btns to color green
-    // add change array size feature
-
     return (
         <section className="container">
             <div className='btns'>
@@ -389,6 +382,9 @@ const Graph = () => {
                 </div>
                 <button id="gen-new-array-btn" className="rounded-btn active-btn" onClick={generateNewArray}>Generate New Array</button>
                 <button id="sort-btn" className="rounded-btn active-btn" onClick={sort}>Sort</button>
+            </div>
+            <div className="window-message-container">
+                <p>Make window wider for a better experience</p>
             </div>
             <div className='graph-container'>
                 <div className='graph' style={{display: 'grid', gridTemplateColumns: 'repeat(' + nums.length + ', 10px)'}}>
