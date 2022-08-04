@@ -59,6 +59,9 @@ const Graph = () => {
     }
 
     const createArray = () => {
+        // const array = [51, 66, 184, 246, 278, 280, 295, 298, 301, 327, 342, 345, 371];
+        // const array = [7, 160, 23, 219, 42, 288, 322, 304, 361, 272, 21];
+        // const array = [247, 235, 367, 87, 366, 79, 124, 260, 189]
         const array = [];
         for (let i = 0; i < arraySize; i++) {
             array.push(Math.floor(Math.random() * 400) + 1)
@@ -83,7 +86,6 @@ const Graph = () => {
         for (let bar of allBars) {
             bar.style.backgroundColor = UNSORTED
         }
-        console.log('generateNewArray triggered.')
     }
 
     const bubbleSort = () => {
@@ -183,9 +185,9 @@ const Graph = () => {
                 }, speed * animationCount)
             } else if (ani[2] === 5) {
                 setTimeout(() => {
-                    let temp = allBars[ani[1]].style.height
-                    allBars[ani[1]].style.height = allBars[ani[0]].style.height
-                    allBars[ani[0]].style.height = temp;
+                    allBars[ani[1]].style.height = ani[3] + 'px';
+                    allBars[ani[0]].style.height = ani[4] + 'px';
+                    console.log(`${ani[3]}   ${ani[4]}`)
                 }, speed * animationCount)
             } else {
                 setTimeout(() => {
@@ -218,7 +220,6 @@ const Graph = () => {
             } else if (ani[2] === 2) {
                 setTimeout(() => {
                     let temp = allBars[ani[0]].style.height;
-                    console.log(temp)
                     allBars[ani[0]].style.height = allBars[ani[1]].style.height;
                     allBars[ani[1]].style.height = temp;
                 }, speed * animationCount)
@@ -281,7 +282,6 @@ const Graph = () => {
 
     // Drop down
     const showAlgorithms = () => {
-        console.log('clicked')
         const dropDownBtn = document.getElementById('sorting-algorithms')
         if (dropDownBtn.style.visibility === 'hidden') {
             dropDownBtn.style.visibility = 'visible';
@@ -329,7 +329,7 @@ const Graph = () => {
         disableBtns();
         document.getElementById('sorting-algorithms').style.visibility = 'hidden';
         document.getElementById('speed-selection').style.visibility = 'hidden';
-
+        console.log(nums)
         switch(currentAlgorithm) {
             case 'Bubble Sort':
                 bubbleSort();

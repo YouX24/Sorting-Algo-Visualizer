@@ -91,7 +91,7 @@ export const selectionSortAnimation = (array) => {
 
         // swap the two bars
         // 5 = swap values
-        animation.push([i, min, 5]);
+        animation.push([i, min, 5, array[i], array[min]]);
 
         // revert the swapped bars back to regular color
         animation.push([i, min, 3]);
@@ -107,7 +107,7 @@ export const selectionSortAnimation = (array) => {
 
     // Color the last bar
     animation.push([array.length - 1, array.length - 1, 6])
-
+    console.log(array);
     return animation;
 }
 
