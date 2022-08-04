@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Sorting-Algo-Visualizer/static/css/main.46f41d3c.css",
+    "main.js": "/Sorting-Algo-Visualizer/static/js/main.b8f618bc.js",
+    "index.html": "/Sorting-Algo-Visualizer/index.html",
+    "main.46f41d3c.css.map": "/Sorting-Algo-Visualizer/static/css/main.46f41d3c.css.map",
+    "main.b8f618bc.js.map": "/Sorting-Algo-Visualizer/static/js/main.b8f618bc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.46f41d3c.css",
+    "static/js/main.b8f618bc.js"
+  ]
+}
