@@ -101,9 +101,8 @@ const Graph = () => {
                 }, speed * animationCount)
             } else if (ani[2] === 1) {
                 setTimeout(() => {
-                    let temp = allBars[ani[0]].style.height;
-                    allBars[ani[0]].style.height = allBars[ani[1]].style.height;
-                    allBars[ani[1]].style.height = temp;
+                    allBars[ani[0]].style.height = ani[4] + 'px';
+                    allBars[ani[1]].style.height = ani[3] + 'px'
                 }, speed * animationCount)
             } else if (ani[2] === 3) {
                 setTimeout(() => {
@@ -137,9 +136,8 @@ const Graph = () => {
             }
             else if (ani[2] === 1) {
                 setTimeout(() => {
-                    let temp = allBars[ani[0]].style.height;
-                    allBars[ani[0]].style.height = allBars[ani[1]].style.height;
-                    allBars[ani[1]].style.height = temp;
+                    allBars[ani[0]].style.height = ani[4] + 'px';
+                    allBars[ani[1]].style.height = ani[3] + 'px';
                 }, speed * animationCount)
             } else if (ani[2] === 2) {
                 setTimeout(() => {
@@ -219,9 +217,8 @@ const Graph = () => {
                 }, speed * animationCount)
             } else if (ani[2] === 2) {
                 setTimeout(() => {
-                    let temp = allBars[ani[0]].style.height;
-                    allBars[ani[0]].style.height = allBars[ani[1]].style.height;
-                    allBars[ani[1]].style.height = temp;
+                    allBars[ani[0]].style.height = ani[4] + 'px';
+                    allBars[ani[1]].style.height = ani[3] + 'px';
                 }, speed * animationCount)
             } else if (ani[2] === 3) {
                 setTimeout(() => {

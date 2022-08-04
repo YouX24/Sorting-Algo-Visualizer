@@ -6,12 +6,14 @@ export const bubbleSortAnimation = (array) => {
             // 0 = change color
             animation.push([j, j+1, 0])
             if (array[j] > array[j + 1]) {
+
+                //push to animation array to swap value
+                // 1 = swap values
+                animation.push([j, j+1, 1, array[j], array[j + 1]]);
+
                 const temp = array[j];
                 array[j] = array[j + 1];
                 array[j + 1] = temp;
-                //push to animation array to swap value
-                // 1 = swap values
-                animation.push([j, j+1, 1]);
             }
             // push to animation array to revert bar color
             // 2 = revert color
@@ -33,11 +35,14 @@ export const insertionSortAnimation = (array) => {
         while (prevIndex >=  0 && currentValue < array[prevIndex]) {
             // push to change color
             animation.push([prevIndex + 1, prevIndex, 0])
+
+            // push to swap value
+            animation.push([prevIndex + 1, prevIndex, 1, array[prevIndex + 1], array[prevIndex]])
+
             let temp = array[prevIndex + 1];
             array[prevIndex + 1] = array[prevIndex];
             array[prevIndex] = temp;
-            // push to swap value
-            animation.push([prevIndex + 1, prevIndex, 1])
+            
             // push to revert color
             animation.push([prevIndex + 1, prevIndex, 2])
             prevIndex--;
@@ -148,7 +153,7 @@ const partition = (array, low, high, animation) => {
 
             // swap the bars
             // 2 = swap bars
-            animation.push([i, j, 2])
+            animation.push([i, j, 2, array[i], array[j]])
 
             // revert the bar color
             // 3 = revert color
@@ -168,7 +173,7 @@ const partition = (array, low, high, animation) => {
     animation.push([i + 1, high, 1])
 
     // swap the bars
-    animation.push([i + 1, high, 2])
+    animation.push([i + 1, high, 2, array[i + 1], array[high]])
 
     // revert the bar color
     animation.push([i + 1, high, 3])
