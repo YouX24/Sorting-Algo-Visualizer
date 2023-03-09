@@ -1,5 +1,5 @@
 # Sorting Algorithm Visualizer
-This project is a visualization of common sorting algorithms implemented in Javascript. The algorithms currently implemented include Bubble Sort, Selection Sort, Insertion Sort, Quick Sort, and Merge Sort.
+This project is a visualization of common sorting algorithms implemented in Javascript. The algorithms currently implemented include Bubble Sort, Selection Sort, Insertion Sort, Quick Sort, and Merge Sort.  
 Live Site: https://youx24.github.io/Sorting-Algo-Visualizer/
 
 
